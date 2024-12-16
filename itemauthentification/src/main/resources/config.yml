@@ -1,1 +1,11 @@
 identification-cost: 1.0 # default cost
+
+# LANGUAGE CONFIG
+
+player-only-cmd: "This is a player only command!"
+player-must-hold-an-item: "You must hold an item to authentificate it!"
+item-already-authentified: "This item is already authentified!"
+not-enough-money: "You do not have enough money"
+authentification-success: "Item successfully authentificate!"
+
+authentified-by: "Authentified by " # the space at the end is IMPORTANT !!

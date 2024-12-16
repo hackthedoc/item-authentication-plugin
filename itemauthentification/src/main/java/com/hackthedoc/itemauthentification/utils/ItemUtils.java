@@ -10,6 +10,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+import com.hackthedoc.itemauthentification.ItemAuthentificationPlugin;
+
 public class ItemUtils {
     private static final String AUTH_KEY = "authentified";
     private static final String NAMESPACE = "itemauthentification";
@@ -32,7 +34,7 @@ public class ItemUtils {
         List<String> lore = meta.getLore();
         if (lore == null) lore = new ArrayList<>();
 
-        lore.add(ChatColor.GOLD+"Authentified by " + player.getName());
+        lore.add(ChatColor.GOLD+ItemAuthentificationPlugin.getInstance().getConfig().getString("authentified-by") + player.getName());
         
         meta.setLore(lore);
         item.setItemMeta(meta);

@@ -21,7 +21,7 @@ public class AuthentificateCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String lbl, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED+"This is a player only command!");
+            sender.sendMessage(ChatColor.RED+plugin.getConfig().getString("player-only-cmd"));
             return true;
         }
 
@@ -31,11 +31,11 @@ public class AuthentificateCommand implements CommandExecutor {
         
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            player.sendMessage(ChatColor.RED+"You must hold an item to authentificate it!");
+            player.sendMessage(ChatColor.RED+plugin.getConfig().getString("player-must-hold-an-item"));
             return true;
         }
         if (ItemUtils.isItemAuthentified(item)) {
-            player.sendMessage(ChatColor.RED+"This item is already authentified!");
+            player.sendMessage(ChatColor.RED+plugin.getConfig().getString("item-already-authentified"));
             return true;
         }
 
@@ -43,7 +43,7 @@ public class AuthentificateCommand implements CommandExecutor {
 
         double cost = plugin.getConfig().getDouble("identification-cost");
         if (!plugin.getEconomyManager().getEconomy().has(player, cost)) {
-            player.sendMessage(ChatColor.RED+"You do not have enough money ("+cost+")");
+            player.sendMessage(ChatColor.RED+plugin.getConfig().getString("not-enough-money")+" ("+cost+")");
             return true;
         }
 
@@ -51,7 +51,7 @@ public class AuthentificateCommand implements CommandExecutor {
 
         plugin.getEconomyManager().getEconomy().withdrawPlayer(player, cost);
         ItemUtils.authentificateItem(item, player);
-        player.sendMessage(ChatColor.GREEN+"Item successfully authentificate!");
+        player.sendMessage(ChatColor.GREEN+plugin.getConfig().getString("authentification-success"));
 
         return true;
     }
