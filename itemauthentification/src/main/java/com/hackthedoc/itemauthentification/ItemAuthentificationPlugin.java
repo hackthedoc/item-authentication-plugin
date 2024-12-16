@@ -5,7 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.hackthedoc.itemauthentification.commands.AuthentificateCommand;
 import com.hackthedoc.itemauthentification.economy.EconomyManager;
-import com.hackthedoc.itemauthentification.listeners.AnvilListener;
+import com.hackthedoc.itemauthentification.listeners.ItemModifierListener;
 
 public class ItemAuthentificationPlugin extends JavaPlugin {
   private static final Logger LOGGER=Logger.getLogger("itemauthentification");
@@ -22,7 +22,7 @@ public class ItemAuthentificationPlugin extends JavaPlugin {
     getCommand("authentificate").setExecutor(new AuthentificateCommand(instance));
 
     // register listeners
-    getServer().getPluginManager().registerEvents(new AnvilListener(), instance);
+    getServer().getPluginManager().registerEvents(new ItemModifierListener(), instance);
 
     LOGGER.info("itemauthentification enabled");
   }
