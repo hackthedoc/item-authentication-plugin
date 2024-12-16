@@ -1,4 +1,4 @@
-package com.hackthedoc.itemauthentification.utils;
+package com.hackthedoc.itemauthentication.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +10,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import com.hackthedoc.itemauthentification.ItemAuthentificationPlugin;
+import com.hackthedoc.itemauthentication.ItemAuthenticationPlugin;
 
 public class ItemUtils {
-    private static final String AUTH_KEY = "authentified";
-    private static final String NAMESPACE = "itemauthentification";
+    private static final String AUTH_KEY = "authenticated";
+    private static final String NAMESPACE = "itemauthentication";
     private static final NamespacedKey NAMESPACED_KEY = new NamespacedKey(NAMESPACE, AUTH_KEY);
 
-    public static void authentificateItem(ItemStack itemStack, Player player) {
-        if (isItemAuthentified(itemStack)) return;
+    public static void authenticateItem(ItemStack itemStack, Player player) {
+        if (isItemAuthenticated(itemStack)) return;
 
         // parse the item to authentificate from the stack
         ItemStack item = itemStack.clone();
@@ -34,7 +34,7 @@ public class ItemUtils {
         List<String> lore = meta.getLore();
         if (lore == null) lore = new ArrayList<>();
 
-        lore.add(ChatColor.GOLD+ItemAuthentificationPlugin.getInstance().getConfig().getString("authentified-by") + player.getName());
+        lore.add(ChatColor.GOLD+ItemAuthenticationPlugin.getInstance().getConfig().getString("authenticated-by") + player.getName());
         
         meta.setLore(lore);
         item.setItemMeta(meta);
@@ -44,7 +44,7 @@ public class ItemUtils {
             player.getWorld().dropItem(player.getLocation(), item);
     }
 
-    public static boolean isItemAuthentified(ItemStack item) {
+    public static boolean isItemAuthenticated(ItemStack item) {
         return item != null &&
             item.getItemMeta() != null &&
             item.getItemMeta().getPersistentDataContainer().has(NAMESPACED_KEY, PersistentDataType.BOOLEAN);

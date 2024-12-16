@@ -1,15 +1,15 @@
-package com.hackthedoc.itemauthentification;
+package com.hackthedoc.itemauthentication;
 
 import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.hackthedoc.itemauthentification.commands.AuthentificateCommand;
-import com.hackthedoc.itemauthentification.economy.EconomyManager;
-import com.hackthedoc.itemauthentification.listeners.ItemModifierListener;
+import com.hackthedoc.itemauthentication.commands.AuthenticateCommand;
+import com.hackthedoc.itemauthentication.economy.EconomyManager;
+import com.hackthedoc.itemauthentication.listeners.ItemModifierListener;
 
-public class ItemAuthentificationPlugin extends JavaPlugin {
+public class ItemAuthenticationPlugin extends JavaPlugin {
   private static final Logger LOGGER=Logger.getLogger("itemauthentification");
-  private static ItemAuthentificationPlugin instance;
+  private static ItemAuthenticationPlugin instance;
   private EconomyManager economyManager;
 
   @Override
@@ -19,20 +19,20 @@ public class ItemAuthentificationPlugin extends JavaPlugin {
     economyManager = new EconomyManager(instance);
 
     // register commands
-    getCommand("authentificate").setExecutor(new AuthentificateCommand(instance));
+    getCommand("authenticate").setExecutor(new AuthenticateCommand(instance));
 
     // register listeners
     getServer().getPluginManager().registerEvents(new ItemModifierListener(), instance);
 
-    LOGGER.info("itemauthentification enabled");
+    LOGGER.info("itemauthentication enabled");
   }
 
   @Override
   public void onDisable() {
-    LOGGER.info("itemauthentification disabled");
+    LOGGER.info("itemauthentication disabled");
   }
 
-  public static ItemAuthentificationPlugin getInstance() {
+  public static ItemAuthenticationPlugin getInstance() {
     return instance;
   }
 

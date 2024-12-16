@@ -1,4 +1,4 @@
-package com.hackthedoc.itemauthentification.commands;
+package com.hackthedoc.itemauthentication.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -6,15 +6,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.hackthedoc.itemauthentification.ItemAuthentificationPlugin;
-import com.hackthedoc.itemauthentification.utils.ItemUtils;
+import com.hackthedoc.itemauthentication.ItemAuthenticationPlugin;
+import com.hackthedoc.itemauthentication.utils.ItemUtils;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class AuthentificateCommand implements CommandExecutor {
-    private  final ItemAuthentificationPlugin plugin;
+public class AuthenticateCommand implements CommandExecutor {
+    private  final ItemAuthenticationPlugin plugin;
 
-    public AuthentificateCommand(ItemAuthentificationPlugin plugin) {
+    public AuthenticateCommand(ItemAuthenticationPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -34,8 +34,8 @@ public class AuthentificateCommand implements CommandExecutor {
             player.sendMessage(ChatColor.RED+plugin.getConfig().getString("player-must-hold-an-item"));
             return true;
         }
-        if (ItemUtils.isItemAuthentified(item)) {
-            player.sendMessage(ChatColor.RED+plugin.getConfig().getString("item-already-authentified"));
+        if (ItemUtils.isItemAuthenticated(item)) {
+            player.sendMessage(ChatColor.RED+plugin.getConfig().getString("item-already-authenticated"));
             return true;
         }
 
@@ -50,8 +50,8 @@ public class AuthentificateCommand implements CommandExecutor {
         // apply authentification
 
         plugin.getEconomyManager().getEconomy().withdrawPlayer(player, cost);
-        ItemUtils.authentificateItem(item, player);
-        player.sendMessage(ChatColor.GREEN+plugin.getConfig().getString("authentification-success"));
+        ItemUtils.authenticateItem(item, player);
+        player.sendMessage(ChatColor.GREEN+plugin.getConfig().getString("authentication-success"));
 
         return true;
     }
