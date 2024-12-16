@@ -26,17 +26,28 @@ public class AuthentificateCommand implements CommandExecutor {
         }
 
         Player player = (Player)sender;
+
+        // parse item
+        
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
             player.sendMessage(ChatColor.RED+"You must hold an item to authentificate it!");
             return true;
         }
+        if (ItemUtils.isItemAuthentified(item)) {
+            player.sendMessage(ChatColor.RED+"This item is already authentified!");
+            return true;
+        }
+
+        // parse cost
 
         double cost = plugin.getConfig().getDouble("identification-cost");
         if (!plugin.getEconomyManager().getEconomy().has(player, cost)) {
             player.sendMessage(ChatColor.RED+"You do not have enough money ("+cost+")");
             return true;
         }
+
+        // apply authentification
 
         plugin.getEconomyManager().getEconomy().withdrawPlayer(player, cost);
         ItemUtils.authentificateItem(item, player);
