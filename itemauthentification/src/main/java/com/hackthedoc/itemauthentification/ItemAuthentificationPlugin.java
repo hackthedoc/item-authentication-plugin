@@ -6,8 +6,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.hackthedoc.itemauthentification.commands.AuthentificateCommand;
 import com.hackthedoc.itemauthentification.economy.EconomyManager;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class ItemAuthentificationPlugin extends JavaPlugin {
   private static final Logger LOGGER=Logger.getLogger("itemauthentification");
   private static ItemAuthentificationPlugin instance;
@@ -21,12 +19,12 @@ public class ItemAuthentificationPlugin extends JavaPlugin {
 
     getCommand("authentificate").setExecutor(new AuthentificateCommand(instance));
 
-    LOGGER.info(ChatColor.YELLOW+"itemauthentification enabled");
+    LOGGER.info("itemauthentification enabled");
   }
 
   @Override
   public void onDisable() {
-    LOGGER.info(ChatColor.YELLOW+"itemauthentification disabled");
+    LOGGER.info("itemauthentification disabled");
   }
 
   public static ItemAuthentificationPlugin getInstance() {
