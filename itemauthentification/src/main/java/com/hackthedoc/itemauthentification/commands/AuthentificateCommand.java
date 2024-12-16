@@ -25,6 +25,8 @@ public class AuthentificateCommand implements CommandExecutor {
             return true;
         }
 
+        // parse player
+
         Player player = (Player)sender;
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
@@ -32,14 +34,34 @@ public class AuthentificateCommand implements CommandExecutor {
             return true;
         }
 
+        // parse cost
+
         double cost = plugin.getConfig().getDouble("identification-cost");
         if (!plugin.getEconomyManager().getEconomy().has(player, cost)) {
             player.sendMessage(ChatColor.RED+"You do not have enough money ("+cost+")");
             return true;
         }
+        
+        // parse auth owner
 
-        plugin.getEconomyManager().getEconomy().withdrawPlayer(player, cost);
-        ItemUtils.authentificateItem(item, player);
+        String owner;
+
+        switch (args[0]) {
+        case "nation":
+            owner = plugin.getLandsManager().getPlayerOwningNationName(player.getUniqueId());
+            break;
+        case "land":
+            owner = plugin.getLandsManager().getPlayerOwningLandName(player.getUniqueId());
+            break;
+        default:
+            owner = player.getName();
+            plugin.getEconomyManager().getEconomy().withdrawPlayer(player, cost);
+            break;
+        }
+
+        ItemUtils.authentificateItem(item, player, player.getName());
+
+
         player.sendMessage(ChatColor.GREEN+"Item successfully authentificate!");
 
         return true;

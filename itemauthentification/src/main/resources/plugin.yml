@@ -6,7 +6,9 @@ description: "Unique Item Authentification system"
 commands:
   authentificate:
     description: "Authentificate the object hold by the player"
-    usage: "/authentificate"
+    usage: "/authentificate [player|land|nation]"
+    aliases:
+      - auth
     permission: itemauthentification.use
 permissions:
   itemauthentification.use:

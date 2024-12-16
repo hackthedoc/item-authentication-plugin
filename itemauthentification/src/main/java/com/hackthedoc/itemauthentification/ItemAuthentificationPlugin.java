@@ -5,18 +5,21 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.hackthedoc.itemauthentification.commands.AuthentificateCommand;
 import com.hackthedoc.itemauthentification.economy.EconomyManager;
+import com.hackthedoc.itemauthentification.lands.LandsManager;
 import com.hackthedoc.itemauthentification.listeners.AnvilListener;
 
 public class ItemAuthentificationPlugin extends JavaPlugin {
   private static final Logger LOGGER=Logger.getLogger("itemauthentification");
   private static ItemAuthentificationPlugin instance;
   private EconomyManager economyManager;
+  private LandsManager landsManager;
 
   @Override
   public void onEnable() {
     instance = this;
     saveDefaultConfig();
     economyManager = new EconomyManager(instance);
+    landsManager = new LandsManager(instance);
 
     // register commands
     getCommand("authentificate").setExecutor(new AuthentificateCommand(instance));
@@ -38,5 +41,9 @@ public class ItemAuthentificationPlugin extends JavaPlugin {
 
   public EconomyManager getEconomyManager() {
     return economyManager;
+  }
+
+  public LandsManager getLandsManager() {
+    return landsManager;
   }
 }

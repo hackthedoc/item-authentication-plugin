@@ -21,7 +21,6 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
 
-        <!-- VAULT repository -->
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
@@ -50,6 +49,15 @@
             <version>1.7</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- LANDS -->
+        <dependency>
+            <groupId>com.github.angeschossen</groupId>
+            <artifactId>LandsAPI</artifactId>
+            <version>7.10.13</version>
+            <scope>provided</scope>
+        </dependency>
+                        
     </dependencies>
 
     <build>

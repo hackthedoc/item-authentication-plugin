@@ -15,7 +15,7 @@ public class ItemUtils {
     private static final String NAMESPACE = "itemauthentification";
     private static final NamespacedKey NAMESPACED_KEY = new NamespacedKey(NAMESPACE, AUTH_KEY);
 
-    public static void authentificateItem(ItemStack itemStack, Player player) {
+    public static void authentificateItem(ItemStack itemStack, Player player, String ownerString) {
         if (isItemAuthentified(itemStack)) return;
 
         // parse the item to authentificate from the stack
@@ -32,7 +32,7 @@ public class ItemUtils {
         List<String> lore = meta.getLore();
         if (lore == null) lore = new ArrayList<>();
 
-        lore.add(ChatColor.GOLD+"Authentified by " + player.getName());
+        lore.add(ChatColor.GOLD+"Authentified by " + ownerString);
         
         meta.setLore(lore);
         item.setItemMeta(meta);
